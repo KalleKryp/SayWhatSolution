@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SayWhat", "SayWhat\SayWhat.csproj", "{0D57D394-E686-4D32-A7A0-4EB394D47BD5}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "LyricsDatabase", "LyricsDatabase\LyricsDatabase.sqlproj", "{3203741C-E652-44A7-853B-695A9C27DF68}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D57D394-E686-4D32-A7A0-4EB394D47BD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D57D394-E686-4D32-A7A0-4EB394D47BD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D57D394-E686-4D32-A7A0-4EB394D47BD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D57D394-E686-4D32-A7A0-4EB394D47BD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3203741C-E652-44A7-853B-695A9C27DF68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3203741C-E652-44A7-853B-695A9C27DF68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3203741C-E652-44A7-853B-695A9C27DF68}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{3203741C-E652-44A7-853B-695A9C27DF68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3203741C-E652-44A7-853B-695A9C27DF68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3203741C-E652-44A7-853B-695A9C27DF68}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {49837E87-5547-486A-87B0-6464C602DEB3}
+	EndGlobalSection
+EndGlobal

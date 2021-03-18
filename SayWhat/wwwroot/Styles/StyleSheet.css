@@ -1,0 +1,26 @@
+﻿body {
+    max-width: 800px;
+    background-color: #1E2D66;
+    color: bisque;
+    margin: auto
+}
+
+nav {
+    max-width: 800px;
+    background-color: #1E2D66;
+    color: bisque;
+    margin: auto;
+}
+.logo {
+    color: bisque;
+
+}
+
+a {
+    color: bisque;
+    font-weight:700
+}
+
+a:hover {
+    color: #FF6A27
+}

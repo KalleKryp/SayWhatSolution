@@ -1,0 +1,24 @@
+﻿@model LyricsToplistVM[]
+
+@*@{ ViewBag.Title = "Say What!?";}*@
+
+
+<div>
+    <table>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.Artist - @item.Song</td>
+                
+            </tr>
+                <tr>
+                    <td>
+                    @item.Lyric1
+                    </td>
+            </tr>
+
+            }
+        </tbody>
+    </table>
+</div>

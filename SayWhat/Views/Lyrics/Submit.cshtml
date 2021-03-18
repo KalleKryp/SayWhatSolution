@@ -1,0 +1,31 @@
+﻿@model LyricsSubmitVM
+@*@{ ViewBag.Title = "Say What!?";}*@
+
+<form method="post">
+    <label asp-for="Artist"></label>
+    <br />
+    <input asp-for="Artist" />
+    <span asp-validation-for="Artist"></span>
+    <br />
+    <label asp-for="Song"></label>
+    <br />
+    <input asp-for="Song" />
+    <label asp-for="Lyric1"></label>
+    <textarea asp-for="Lyric1" rows="3" cols="20"></textarea>
+    <span asp-validation-for="Lyric1"></span>
+
+    <br />
+    <label asp-for="BotCheck"></label>
+    <br />
+    <input asp-for="BotCheck" />
+    <span asp-validation-for="BotCheck"></span>
+
+
+    <br />
+    <input class="button button-primary" type="submit" value="Create" />
+</form>
+
+@section script {
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.2/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
+}
