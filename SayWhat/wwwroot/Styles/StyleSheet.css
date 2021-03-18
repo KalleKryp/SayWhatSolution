@@ -1,26 +1,118 @@
-﻿body {
+﻿@font-face {
+    font-family: "Cooper Regular";
+    src:url('../Fonts/Cooper Black Regular.ttf');
+}
+
+@font-face {
+    font-family: "Cooper Italic";
+    src: url('../Fonts/Cooper Black Italic.otf');
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Slabo+13px&display=swap');
+
+body {
     max-width: 800px;
-    background-color: #1E2D66;
+    background-color: #121A3D;
     color: bisque;
-    margin: auto
+    margin: auto;
+    font-family: 'Slabo 13px', serif;
+    font-size: 18px;
 }
 
 nav {
     max-width: 800px;
-    background-color: #1E2D66;
+    background-color: #121A3D;
     color: bisque;
     margin: auto;
+    font-family: 'Cooper Regular';
+
 }
 .logo {
     color: bisque;
-
+    font-size: 60px;
+    font-family: 'Cooper Italic';
+    transform: rotate(355deg);
+    text-shadow: 2px 2px 0px #3F4AAB, 4px 4px 0px #FFC233, 6px 6px 0px #FF6A27;
 }
 
 a {
     color: bisque;
-    font-weight:700
+    font-weight:700;
+    text-decoration: none;
 }
 
 a:hover {
     color: #FF6A27
+}
+
+.main {
+    margin: 20px 50px;
+    max-width: 600px;
+}
+
+.input_field {
+    background-color: #121A3D;
+    border: solid;
+    border-width: 2px;
+    border-color: bisque;
+    color: bisque;
+    border-radius: 5px;
+}
+
+.button {
+    background-color: bisque;
+    border: solid;
+    border-width: 2px;
+    border-color: #3F4AAB;
+    color: #121A3D;
+    border-radius: 5px;
+    font-family: 'Slabo 13px', serif;
+    font-size: 18px;
+    font-weight: 800;
+    padding: 3px 10px;
+}
+
+.button:hover {
+    border-color: #FF6A27;
+}
+
+.index {
+    font-size: 20px;
+    position: center;
+}
+
+h2 {
+    font-family: 'Cooper Italic';
+    font-size: 25px;
+}
+
+h3 {
+    font-family: 'Cooper Italic';
+    font-size: 20px;
+}
+
+.list_item {
+    
+    background-color: bisque;
+    /*border: solid;
+    border-width: 2px;
+    border-color: #3F4AAB;*/
+    color: #121A3D;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px 35px 1px 15px;
+    position:center;
+    font-weight: 600;
+}
+
+a.bluetext {
+    color: #121A3D;
+}
+
+.section_left {
+    overflow: hidden;
+}
+
+.section_right {
+
 }

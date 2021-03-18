@@ -1,0 +1,23 @@
+﻿@model LyricsAdminVM[]
+@*@{ ViewBag.Title = "Say What!?";}*@
+
+
+<div>
+    @foreach (var item in Model)
+    {
+    <section class="list_item">
+        <section class="section_left">
+            <h3>@item.Artist – @item.Song</h3>
+            <p>
+                "@item.Lyric1"
+            </p>
+        </section>
+
+        <section class="section_right">
+            <a class="bluetext" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            <br />
+            <a class="bluetext"  asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+        </section>
+    </section>
+    }
+</div>

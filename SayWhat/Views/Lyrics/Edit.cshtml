@@ -1,20 +1,20 @@
-﻿@model LyricsSubmitVM
+﻿@model LyricsEditVM
 @*@{ ViewBag.Title = "Say What!?";}*@
 
 <form method="post">
     <label asp-for="Artist"></label>
     <br />
-    <input class="input_field" asp-for="Artist" />
+    <input class="input_field" asp-for="Artist" value="@Model.Artist" />
     <span asp-validation-for="Artist"></span>
     <br />
     <label asp-for="Song"></label>
     <br />
-    <input class="input_field" asp-for="Song" />
+    <input class="input_field" asp-for="Song" value="@Model.Song" />
     <br />
 
     <label asp-for="Lyric1"></label>
     <br />
-    <textarea class="input_field" asp-for="Lyric1" rows="3" cols="20"></textarea>
+    <textarea class="input_field" asp-for="Lyric1" value="@Model.Lyric1" rows="3" cols="20"></textarea>
     <span asp-validation-for="Lyric1"></span>
     <br />
     <label asp-for="BotCheck"></label>

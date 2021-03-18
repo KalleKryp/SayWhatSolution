@@ -55,5 +55,38 @@ namespace SayWhat.Controllers
             return View(toplist);
         }
 
+
+        [Route("/admin")]
+        public IActionResult Admin()
+        {
+            var all = service.GetAll();
+            return View(all);
+        }
+
+
+
+        [Route("/edit/{id}")]
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var lyrics = service.GetLyricById(id);
+            return View(lyrics);
+        }
+
+
+        //En action - svarar på ett HTTP-anrop
+        [Route("/edit/{id}")]
+        [HttpPost]
+        public IActionResult Edit(LyricsEditVM lyrics)
+        {
+            if (!ModelState.IsValid)
+                return View(lyrics);
+
+            service.EditLyrics(lyrics);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
     }
 }

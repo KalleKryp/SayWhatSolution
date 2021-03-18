@@ -4,21 +4,13 @@
 
 
 <div>
-    <table>
-        <tbody>
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td>@item.Artist - @item.Song</td>
-                
-            </tr>
-                <tr>
-                    <td>
-                    @item.Lyric1
-                    </td>
-            </tr>
-
-            }
-        </tbody>
-    </table>
+    @foreach (var item in Model)
+    {
+    <section class="list_item">
+        <h3>@item.Artist – @item.Song</h3>
+        <p>
+            "@item.Lyric1"
+        </p>
+    </section>
+    }
 </div>

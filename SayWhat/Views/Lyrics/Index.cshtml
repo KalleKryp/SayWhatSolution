@@ -2,7 +2,9 @@
 
 @*@{ ViewBag.Title = "Say What!?";}*@
 
-
-    <p>@Model.Artist</p>
-    <p>@Model.Song</p>
-    <p>@Model.Lyric1</p>
+<section class="index">
+    <h2>@Model.Artist – @Model.Song</h2>
+    <p>"@Model.Lyric1"</p>
+    <br />
+    <button type="button" asp-controller="Lyrics" asp-action="Index" class="button">Give me more weird, bad and confusing lyrics</button>
+</section>
