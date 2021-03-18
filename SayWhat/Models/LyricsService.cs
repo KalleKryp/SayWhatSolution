@@ -45,6 +45,7 @@ namespace SayWhat.Models
                 Song = viewModel.Song,
                 Lyric1 = tempLyric
             });
+
             context.SaveChanges();
         }
 
@@ -59,14 +60,20 @@ namespace SayWhat.Models
             }).OrderBy(l => l.Artist).ToArray();
         }
 
-        internal object GetLyricById(int id)
+        internal LyricsEditVM GetLyricById(int id)
         {
-            return context.Lyrics.FirstOrDefault(l => l.Id == id);
+            var temp = context.Lyrics.FirstOrDefault(l => l.Id == id);
+            return new LyricsEditVM
+            {
+                Id = temp.Id,
+                Artist = temp.Artist,
+                Song = temp.Song,
+                Lyric1 = temp.Lyric1,
+            };
         }
 
         internal LyricsToplistVM[] GetToplist()
         {
-
             return context.Lyrics.Select(l => new LyricsToplistVM
             {
                 Artist = l.Artist,
@@ -76,12 +83,22 @@ namespace SayWhat.Models
             }).OrderBy(l => l.Rating).ToArray();
         }
 
+        internal void DeleteEntry(int id)
+        {
+            var lyricsToDelete = context.Lyrics.FirstOrDefault(l => l.Id == id);
+            context.Lyrics.Remove(lyricsToDelete);
+
+            context.SaveChanges();
+        }
+
         internal void EditLyrics(LyricsEditVM viewModel)
         {
             var lyrics = context.Lyrics.FirstOrDefault(l => l.Id == viewModel.Id);
             lyrics.Artist = viewModel.Artist;
             lyrics.Song = viewModel.Song;
             lyrics.Lyric1 = viewModel.Lyric1;
+
+            context.SaveChanges();
         }
 
 

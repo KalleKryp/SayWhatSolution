@@ -84,7 +84,14 @@ namespace SayWhat.Controllers
 
             service.EditLyrics(lyrics);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Admin");
+        }
+
+        [Route("/delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            service.DeleteEntry(id);
+            return RedirectToAction("Admin");
         }
 
 
