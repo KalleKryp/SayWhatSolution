@@ -1,6 +1,5 @@
 ﻿@model LyricsToplistVM[]
 
-@*@{ ViewBag.Title = "Say What!?";}*@
 
 
 <div>
@@ -8,6 +7,7 @@
     {
     <section class="list_item">
         <h3>@item.Artist – @item.Song</h3>
+        <p>Rating: @item.Rating</p>
         <p>
             "@item.Lyric1"
         </p>

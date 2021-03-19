@@ -1,5 +1,4 @@
 ﻿@model LyricsAdminVM[]
-@*@{ ViewBag.Title = "Say What!?";}*@
 
 
 <div>
@@ -14,9 +13,9 @@
         </section>
 
         <section class="section_right">
-            <a class="bluetext" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            <a class="bluetext" asp-action="Edit" asp-route-id="@item.Id"><img class="symbol" src="~/Images/SVG/edit_black_24dp.svg" /></a>
             <br />
-            <a class="bluetext"  asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            <a class="bluetext"  asp-action="Delete" asp-route-id="@item.Id"><img class="symbol" src="~/Images/SVG/delete_black_24dp.svg" /></a>
         </section>
     </section>
     }

@@ -20,9 +20,10 @@ namespace SayWhat.Models
 
         public LyricsIndexVM GetRandom()
         {
-            var random = context.Lyrics.OrderBy(x => Guid.NewGuid()).Take(1).First();
+            var random = context.Lyrics.OrderBy(x => Guid.NewGuid()).First();
             return new LyricsIndexVM
             {
+                Id = random.Id,
                 Artist = random.Artist,
                 Song = random.Song,
                 Lyric1 = random.Lyric1,
@@ -80,7 +81,33 @@ namespace SayWhat.Models
                 Song = l.Song,
                 Lyric1 = l.Lyric1,
                 Rating = l.Rating
-            }).OrderBy(l => l.Rating).ToArray();
+            }).OrderByDescending(l => l.Rating).Take(10).ToArray();
+        }
+
+        internal void RatingUp(int id)
+        {
+            var lyrics = context.Lyrics.FirstOrDefault(l => l.Id == id);
+
+            if (lyrics.Rating == null)
+                lyrics.Rating = 0;
+
+            lyrics.Rating += 1;
+
+            context.SaveChanges();
+
+        }
+
+        internal void RatingDown(int id)
+        {
+            var lyrics = context.Lyrics.FirstOrDefault(l => l.Id == id);
+
+            if (lyrics.Rating == null)
+                lyrics.Rating = 0;
+
+            lyrics.Rating -= 1;
+
+            context.SaveChanges();
+
         }
 
         internal void DeleteEntry(int id)

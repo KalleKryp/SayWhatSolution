@@ -95,5 +95,23 @@ namespace SayWhat.Controllers
         }
 
 
+        [Route("/ratingup/{id}")]
+        public IActionResult RatingUp(int id)
+        {
+            service.RatingUp(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        [Route("/ratingdown/{id}")]
+        public IActionResult RatingDown(int id)
+        {
+            service.RatingDown(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
+
     }
 }

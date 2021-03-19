@@ -9,13 +9,14 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Slabo+13px&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto+Slab&display=swap');
 
 body {
     max-width: 800px;
     background-color: #121A3D;
     color: bisque;
     margin: auto;
-    font-family: 'Slabo 13px', serif;
+    font-family: 'Roboto Slab', serif;
     font-size: 18px;
 }
 
@@ -33,12 +34,70 @@ nav {
     font-family: 'Cooper Italic';
     transform: rotate(355deg);
     text-shadow: 2px 2px 0px #3F4AAB, 4px 4px 0px #FFC233, 6px 6px 0px #FF6A27;
+    transition: .5s;
+}
+.bubble {
+    background-color: bisque;
+    border-radius: 5px;
+    color: #121A3D;
+    padding: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    display: inline-block;
+    position: relative;
+    max-width: 500px;
+    height: auto;
+    text-align: center;
+}
+
+.bubble_primary {
+    font-family: 'Cooper Regular';
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input, textarea {
+    margin: 0px 0px 10px 0px;
+}
+
+lyrics_index {
+    height: 900px;
+    display: inline-block;
+    position: relative;
+}
+
+.index_action {
+    margin-top: 30px;
+    border: solid;
+    border-width: 2px;
+    border-color: bisque;
+    border-radius: 5px;
+    padding-bottom:15px;
+}
+
+.rating {
+    margin: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
+.rating .symbol {
+    filter: invert(88%) sepia(35%) saturate(334%) hue-rotate(326deg) brightness(103%) contrast(101%);
+}
+
+.rating .symbol:hover {
+    filter: invert(66%) sepia(99%) saturate(4089%) hue-rotate(343deg) brightness(101%) contrast(101%);
 }
 
 a {
     color: bisque;
-    font-weight:700;
+    font-weight: 700;
     text-decoration: none;
+    transition: .5s;
 }
 
 a:hover {
@@ -48,6 +107,8 @@ a:hover {
 .main {
     margin: 20px 50px;
     max-width: 600px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .input_field {
@@ -57,6 +118,7 @@ a:hover {
     border-color: bisque;
     color: bisque;
     border-radius: 5px;
+    
 }
 
 .button {
@@ -66,10 +128,11 @@ a:hover {
     border-color: #3F4AAB;
     color: #121A3D;
     border-radius: 5px;
-    font-family: 'Slabo 13px', serif;
+    font-family: 'Roboto Slab', serif;
     font-size: 18px;
     font-weight: 800;
     padding: 3px 10px;
+    margin-top: 5px;
 }
 
 .button:hover {
@@ -77,6 +140,7 @@ a:hover {
 }
 
 .index {
+    margin-top: 25px;
     font-size: 20px;
     position: center;
 }
@@ -84,6 +148,7 @@ a:hover {
 h2 {
     font-family: 'Cooper Italic';
     font-size: 25px;
+    text-align: right;
 }
 
 h3 {
@@ -92,27 +157,34 @@ h3 {
 }
 
 .list_item {
-    
     background-color: bisque;
-    /*border: solid;
-    border-width: 2px;
-    border-color: #3F4AAB;*/
     color: #121A3D;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     padding: 10px 35px 1px 15px;
-    position:center;
+    position: center;
     font-weight: 600;
+    overflow: hidden;
 }
 
+.symbol {
+    filter: invert(10%) sepia(13%) saturate(6616%) hue-rotate(208deg) brightness(89%) contrast(99%);
+}
+
+.symbol:hover {
+    filter: invert(66%) sepia(99%) saturate(4089%) hue-rotate(343deg) brightness(101%) contrast(101%);
+}
 a.bluetext {
     color: #121A3D;
 }
 
 .section_left {
-    overflow: hidden;
+    float: left;
+    width: 90%;
 }
 
 .section_right {
-
+    float: right;
+    margin-top: auto;
+    margin-bottom: auto;
 }
