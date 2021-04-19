@@ -10,7 +10,7 @@ namespace SayWhat.Controllers
 {
     public class LyricsController : Controller
     {
-        LyricsService service;
+        readonly LyricsService service;
 
         public LyricsController(LyricsService service)
         {
@@ -111,7 +111,12 @@ namespace SayWhat.Controllers
         }
 
 
-
+        [Route("/lyrics-box")]
+        public IActionResult LyricsBox()
+        {
+            var random = service.GetRandom();
+            return PartialView("_LyricsBox", random);
+        }
 
     }
 }

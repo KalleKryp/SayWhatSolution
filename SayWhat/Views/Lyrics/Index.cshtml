@@ -2,20 +2,43 @@
 
 
 <section class="index">
-    <section class="lyrics_index">
-        <span>"@Model.Lyric1"</span>
-        <h2>@Model.Artist – @Model.Song</h2>
-    </section>
-    <br />
+    <div id="divResult">
+        @*<section class="lyrics_index">
+            <span>"@Model.Lyric1"</span>
+            <h2>@Model.Artist – @Model.Song</h2>
+        </section>*@
+    </div>
+    <br/>
 
     <section class="index_action">
         <section class="rating">
             <p>How weird was that? Rate it!</p>
-            <a asp-controller="Lyrics" asp-action="RatingUp" asp-route-id="@Model.Id"><img class="symbol" src="~/Images/SVG/thumb_up_black_24dp.svg" /></a>
-            <a asp-controller="Lyrics" asp-action="RatingDown" asp-route-id="@Model.Id"><img class="symbol" src="~/Images/SVG/thumb_down_black_24dp.svg" /></a>
+            <a asp-controller="Lyrics" asp-action="RatingUp" asp-route-id="@Model.Id"><img class="symbol" src="~/Images/SVG/thumb_up_black_24dp.svg"/></a>
+            <a asp-controller="Lyrics" asp-action="RatingDown" asp-route-id="@Model.Id"><img class="symbol" src="~/Images/SVG/thumb_down_black_24dp.svg"/></a>
             <p>Current rating: @Model.Rating</p>
         </section>
 
-        <a class="bubble bubble_primary" asp-controller="Lyrics" asp-action="Index">Give me more weird, bad and confusing lyrics</a>
+        <a class="bubble bubble_primary" @*asp-controller="Lyrics" asp-action="Index"*@ id="main_button">Give me more weird, bad and confusing lyrics</a>
     </section>
 </section>
+
+@section script
+{
+    <script>
+        window.onload = (event) => {
+            getLyrics();
+        };
+
+        $("#main_button").click(function () {
+            getLyrics();
+        });
+
+        function getLyrics() {
+            $.ajax({
+                url: "/lyrics-box",
+                type: "GET",
+                success: (result) => $("#divResult").html(result)
+            });
+        }
+    </script>
+}

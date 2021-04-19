@@ -61,12 +61,6 @@ input, textarea {
     margin: 0px 0px 10px 0px;
 }
 
-lyrics_index {
-    height: 900px;
-    display: inline-block;
-    position: relative;
-}
-
 .index_action {
     margin-top: 30px;
     border: solid;
@@ -187,4 +181,19 @@ a.bluetext {
     float: right;
     margin-top: auto;
     margin-bottom: auto;
+}
+
+
+.lyrics_index {
+    background-color: red;
+    /*display: inline-block;*/
+    /*position: relative;*/
+}
+
+.lyrics_box {
+    min-height: 150px;
+}
+
+.quote {
+    min-height: 300px;
 }

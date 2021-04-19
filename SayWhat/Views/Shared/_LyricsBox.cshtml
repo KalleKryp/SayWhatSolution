@@ -1,0 +1,10 @@
+﻿@model LyricsIndexVM
+
+<section class="lyrics_box">
+    <span>"@Model.Lyric1"</span>
+    <h2>@Model.Artist – @Model.Song</h2>
+    @if (@Model.Rating != null)
+    {
+        <span>Rating: @Model.Rating</span>
+    }
+</section>
