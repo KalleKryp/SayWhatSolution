@@ -1,22 +1,98 @@
-﻿@model LyricsAdminVM[]
+﻿@model LyricsAdminVM
 
 
-<div>
-    @foreach (var item in Model)
+<div class="list">
+    @foreach (var item in Model.ListOfLyricsByLetters)
     {
-    <section class="list_item">
-        <section class="section_left">
-            <h3>@item.Artist – @item.Song</h3>
-            <p>
-                "@item.Lyric1"
-            </p>
-        </section>
+        <div class="list-character-container">
 
-        <section class="section_right">
-            <a class="bluetext" asp-action="Edit" asp-route-id="@item.Id"><img class="symbol" src="~/Images/SVG/edit_black_24dp.svg" /></a>
-            <br />
-            <a class="bluetext"  asp-action="Delete" asp-route-id="@item.Id"><img class="symbol" src="~/Images/SVG/delete_black_24dp.svg" /></a>
-        </section>
-    </section>
+            <div class="list-character">@item.Letter</div>
+        </div>
+
+
+        foreach (var lyric in item.LyricsByLetter)
+        {
+            <section class="list-item">
+                <div class="list-item-content blue_box">
+                    <div class="list-item-left">
+                        <h3>@lyric.Artist – @lyric.Song</h3>
+                        <div>Rating: @lyric.Rating</div>
+                        <div>
+                            "@lyric.Lyric1"
+                        </div>
+
+                    </div>
+                    <section class="list-item-right">
+                        <a asp-controller="Lyrics" asp-action="Edit" asp-route-id="@lyric.Id"><img class="symbol" src="~/Images/SVG/edit_black_24dp.svg" /></a>
+                        <br />
+                        <a href="#" class="delete-button" data-artist="@lyric.Artist" data-song="@lyric.Song" data-lyric="@lyric.Lyric1" value="@lyric.Id"><img class="symbol" src="~/Images/SVG/delete_black_24dp.svg" /></a>
+
+                    </section>
+                </div>
+            </section>
+        }
+
     }
 </div>
+
+
+<div class="modal">
+    <div class="overlay"></div>
+
+    <div class="delete-dialog dialog">
+        <div>Are you sure you want to delete this entry?</div>
+        <div class="entry-artist"></div>
+        <div class="entry-song"></div>
+        <div class="entry-lyrics"></div>
+        <button class="confirm-delete-button button">Yes, delete</button>
+        <button class="cancel-button button">Cancel</button>
+    </div>
+</div>
+
+@section script
+{
+    <script>
+        $(document).ready(function () {
+
+            var id = null;
+
+            $(".delete-button").on("click",
+                function () {
+                    var $this = $(this);
+                    var artist = $this.attr("data-artist");
+                    var song = $this.attr("data-song");
+                    var lyric = $this.attr("data-lyric");
+                    id = $(this).attr("value");
+
+                    $(".entry-artist").text(artist);
+                    $(".entry-song").text(song);
+                    $(".entry-lyrics").text(lyric);
+
+                    $(".modal").fadeToggle(200);
+
+
+                });
+
+            $(".cancel-button").on("click",
+                function () {
+                    $(".modal").fadeToggle(200);
+
+                });
+
+
+            $(".confirm-delete-button").click(function () {
+
+                $.ajax({
+                    type: 'POST',
+                    cache: false,
+                    url: "/delete",
+                    data: { id: id },
+                    success: function () {
+                        location.reload(); // then reload the page.(3)
+                    }
+                });
+
+            });
+        });
+    </script>
+}

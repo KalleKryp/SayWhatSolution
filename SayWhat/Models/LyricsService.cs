@@ -3,9 +3,14 @@ using SayWhat.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Globalization.CultureInfo;
+//using System.Security.Cryptography.X509Certificates;
+//using System.Text;
+//using System.Threading.Tasks;
+//using static System.Globalization.CultureInfo;
+//using System.Data;
+//using System.Web.Services;
+//using System.Configuration;
+//using System.Data.SqlClient;
 
 namespace SayWhat.Models
 {
@@ -50,15 +55,51 @@ namespace SayWhat.Models
             context.SaveChanges();
         }
 
-        internal LyricsAdminVM[] GetAll()
+        internal List<ListOfLyricsByLetter> GetAll()
         {
-            return context.Lyrics.Select(l => new LyricsAdminVM
+            var listOfLyricsByLetters = new List<ListOfLyricsByLetter>();
+            string alphabet = "abcdefghijklmnopqrstuvwxyzåäö";
+
+
+            var all = context.Lyrics.Select(l => new Lyric()
             {
                 Id = l.Id,
                 Artist = l.Artist,
                 Song = l.Song,
                 Lyric1 = l.Lyric1,
-            }).OrderBy(l => l.Artist).ToArray();
+                Rating = l.Rating
+            }).OrderBy(l => l.Artist).ToList();
+
+            //var balancedLists = all.GroupBy(x => x.Artist[0]).Select(x => x.ToList())
+            //    .ToList();
+
+            foreach (char letter in alphabet)
+            {
+                var selection = all.Where(l => l.Artist.ToLower().StartsWith(letter)).ToList();
+
+                if (selection.Any())
+                {
+                    all.RemoveAll(l => l.Artist.ToLower().StartsWith(letter));
+
+                    listOfLyricsByLetters.Add(new ListOfLyricsByLetter
+                    {
+                        Letter = letter.ToString().ToUpper(),
+                        LyricsByLetter = selection
+
+                    });
+                }
+            }
+
+            if (all.Any())
+            {
+                listOfLyricsByLetters.Add(new ListOfLyricsByLetter
+                {
+                    Letter = "#",
+                    LyricsByLetter = all
+                });
+            }
+
+            return listOfLyricsByLetters;
         }
 
         internal LyricsEditVM GetLyricById(int id)
@@ -151,5 +192,29 @@ namespace SayWhat.Models
 
         //    return result.ToString();
         //}
+        public double Rate(int id, int rating)
+        {
+            var lyrics = context.Lyrics.FirstOrDefault(l => l.Id == id);
+
+            if (lyrics.NrOfVotes == null)
+                lyrics.NrOfVotes = 1;
+            else
+                lyrics.NrOfVotes++;
+
+            if (lyrics.Rating == null)
+                lyrics.Rating = rating;
+            else
+                lyrics.Rating = ((lyrics.Rating * lyrics.NrOfVotes) + rating) / (lyrics.NrOfVotes + 1);
+
+            lyrics.Rating = Math.Round((double)lyrics.Rating, 1, MidpointRounding.ToEven);
+
+
+            context.SaveChanges();
+
+
+
+            return (double)lyrics.Rating;
+
+        }
     }
 }

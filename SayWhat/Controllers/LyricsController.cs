@@ -11,10 +11,12 @@ namespace SayWhat.Controllers
     public class LyricsController : Controller
     {
         readonly LyricsService service;
+        private readonly string title;
 
         public LyricsController(LyricsService service)
         {
             this.service = service;
+            title = "Say What?! - The worlds weirdest lyrics ranked";
         }
 
 
@@ -22,6 +24,7 @@ namespace SayWhat.Controllers
         [Route("/index")]
         public IActionResult Index()
         {
+            ViewBag.Title = title;
             var random = service.GetRandom();
             return View(random);
         }
@@ -30,11 +33,12 @@ namespace SayWhat.Controllers
         [HttpGet]
         public IActionResult Submit()
         {
+            ViewBag.Title = "Submit | " + title;
+
             return View();
         }
 
 
-        //En action - svarar på ett HTTP-anrop
         [Route("/submit")]
         [HttpPost]
         public IActionResult Submit(LyricsSubmitVM lyrics)
@@ -51,6 +55,8 @@ namespace SayWhat.Controllers
         [Route("/toplist")]
         public IActionResult Toplist()
         {
+            ViewBag.Title = "Top list | " + title;
+
             var toplist = service.GetToplist();
             return View(toplist);
         }
@@ -59,8 +65,14 @@ namespace SayWhat.Controllers
         [Route("/admin")]
         public IActionResult Admin()
         {
+            ViewBag.Title = "Admin | " + title;
+
             var all = service.GetAll();
-            return View(all);
+            var model = new LyricsAdminVM
+            {
+                ListOfLyricsByLetters = all
+            };
+            return View(model);
         }
 
 
@@ -69,12 +81,13 @@ namespace SayWhat.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            ViewBag.Title = "Edit | " + title;
+
             var lyrics = service.GetLyricById(id);
             return View(lyrics);
         }
 
 
-        //En action - svarar på ett HTTP-anrop
         [Route("/edit/{id}")]
         [HttpPost]
         public IActionResult Edit(LyricsEditVM lyrics)
@@ -87,7 +100,7 @@ namespace SayWhat.Controllers
             return RedirectToAction("Admin");
         }
 
-        [Route("/delete/{id}")]
+        [Route("/delete")]
         public IActionResult Delete(int id)
         {
             service.DeleteEntry(id);
@@ -95,21 +108,12 @@ namespace SayWhat.Controllers
         }
 
 
-        [Route("/ratingup/{id}")]
-        public IActionResult RatingUp(int id)
+        [Route("/rate")]
+        public async Task<IActionResult> RateAsync(int id, int rating)
         {
-            service.RatingUp(id);
-            return RedirectToAction(nameof(Index));
+            var newRating = service.Rate(id, rating);
+            return Content(newRating.ToString());
         }
-
-
-        [Route("/ratingdown/{id}")]
-        public IActionResult RatingDown(int id)
-        {
-            service.RatingDown(id);
-            return RedirectToAction(nameof(Index));
-        }
-
 
         [Route("/lyrics-box")]
         public IActionResult LyricsBox()
@@ -117,6 +121,14 @@ namespace SayWhat.Controllers
             var random = service.GetRandom();
             return PartialView("_LyricsBox", random);
         }
+
+
+        [Route("/test")]
+        public IActionResult Test()
+        {
+            return View();
+        }
+
 
     }
 }

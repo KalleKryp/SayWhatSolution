@@ -1,27 +1,30 @@
 ﻿@model LyricsSubmitVM
 
-<form method="post">
-    <label asp-for="Artist"></label>
-    <br />
-    <input class="input_field" asp-for="Artist" />
-    <span asp-validation-for="Artist"></span>
-    <br />
-    <label asp-for="Song"></label>
-    <br />
-    <input class="input_field" asp-for="Song" />
-    <br />
-    <label asp-for="Lyric1"></label>
-    <br />
-    <textarea class="input_field" asp-for="Lyric1" rows="3" cols="20"></textarea>
-    <span asp-validation-for="Lyric1"></span>
-    <br />
-    <label asp-for="BotCheck"></label>
-    <br />
-    <input class="input_field" asp-for="BotCheck" />
-    <span asp-validation-for="BotCheck"></span>
-    <br />
-    <input class="button button-primary" type="submit" value="Create" />
-</form>
+<div class="blue_box">
+    <h1>Submit</h1>
+    <form method="post">
+        <label asp-for="Artist"></label>
+        <br/>
+        <input class="input_field" asp-for="Artist"/>
+        <span asp-validation-for="Artist"></span>
+        <br/>
+        <label asp-for="Song"></label>
+        <br/>
+        <input class="input_field" asp-for="Song"/>
+        <br/>
+        <label asp-for="Lyric1"></label>
+        <br/>
+        <textarea class="input_field" asp-for="Lyric1" rows="5" cols="30"></textarea>
+        <span asp-validation-for="Lyric1"></span>
+        <br/>
+        <label asp-for="BotCheck"></label>
+        <br/>
+        <input class="input_field" asp-for="BotCheck"/>
+        <span asp-validation-for="BotCheck"></span>
+        <br/>
+        <input class="button button-primary" type="submit" value="Create"/>
+    </form>
+</div>
 
 @section script {
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.2/jquery.validate.min.js"></script>

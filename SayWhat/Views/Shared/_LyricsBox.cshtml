@@ -1,10 +1,61 @@
 ﻿@model LyricsIndexVM
 
-<section class="lyrics_box">
-    <span>"@Model.Lyric1"</span>
-    <h2>@Model.Artist – @Model.Song</h2>
-    @if (@Model.Rating != null)
-    {
-        <span>Rating: @Model.Rating</span>
-    }
+<section>
+    <section class="lyrics_box blue_box">
+        <span>"@Model.Lyric1"</span>
+        <h2>@Model.Artist – @Model.Song</h2>
+    </section>
+
+    <section class="rating">
+        <div>How weird was that? Rate it!</div>
+
+        <div class="rating-bar">
+            <span value="1" id="ratingLabel1" class="rating_value">1</span>
+            <span value="2" id="ratingLabel2" class="rating_value">2</span>
+            <span value="3" id="ratingLabel3" class="rating_value">3</span>
+            <span value="4" id="ratingLabel4" class="rating_value">4</span>
+            <span value="5" id="ratingLabel5" class="rating_value">5</span>
+        </div>
+
+        <div id="rating">
+            @if (@Model.Rating == null)
+            {
+                <p>Not yet rated</p>
+            }
+            else
+            {
+                <p>Current rating: @Model.Rating</p>
+            }    
+        </div> 
+    </section>
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            //$(".rating_value").mouseover(function() {
+            //    $(this).prev(".rating_value").css("color", "#FF6A27");
+            //});
+
+            $(".rating_value").click(function () {
+                var rating = $(this).attr("value");
+                var id = @Model.Id;
+                //alert(rating + " " + id);
+
+                $.ajax({
+                    type: 'POST',
+                    cache: false,
+                    url: "/rate",
+                    data: { id: id, rating: rating },
+                    success: function(data) {
+                        //alert("succé! ny rating är " + data);
+
+                        $("#rating").replaceWith("<p>Current rating: " + data + "</p>");
+                    }
+                });
+
+            });
+        });
+    </script>
 </section>

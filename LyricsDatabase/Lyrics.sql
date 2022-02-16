@@ -4,5 +4,6 @@
 	[Artist] nvarchar(100) not null,
 	[Song] nvarchar(100),
 	[Lyric] nvarchar(max) not null,
-	[Rating] int
+	[Rating] FLOAT,
+	[NrOfVotes] int
 )

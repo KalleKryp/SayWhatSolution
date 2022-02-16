@@ -1,0 +1,32 @@
+﻿@media only screen and (max-width: 770px) {
+
+    .blue_box {
+        padding: 20px 30px;
+    }
+
+    .index {
+        margin: 0 15px;
+    }
+
+    #center-body {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar-nav {
+        padding-top: 20px;
+    }
+
+    #footer {
+        visibility: hidden;
+    }
+
+    .main {
+        padding: 20px 0 40px 0;
+    }
+}
