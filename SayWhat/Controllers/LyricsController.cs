@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SayWhat.Controllers
 {
@@ -61,7 +62,7 @@ namespace SayWhat.Controllers
             return View(toplist);
         }
 
-
+        [Authorize]
         [Route("/admin")]
         public IActionResult Admin()
         {
@@ -74,6 +75,41 @@ namespace SayWhat.Controllers
             };
             return View(model);
         }
+
+
+        [HttpGet]
+        [Route("/login")]
+        public IActionResult Login(string returnUrl)
+        {
+            ViewBag.Title = "Login | " + title;
+
+            return View(new LyricsLoginVM { ReturnUrl = returnUrl });
+        }
+
+        //[HttpPost]
+        //[Route("/login")]
+        //public async Task<IActionResult> LoginAsync(LyricsLoginVM viewModel)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return View(viewModel);
+
+        //    // Check if credentials is valid (and set auth cookie)
+        //    var success = await AccountService.TryLoginAsync(viewModel);
+        //    if (!success)
+        //    {
+        //        // Show error
+        //        ModelState.AddModelError(nameof(LyricsLoginVM.Username), "Login failed");
+        //        return View(viewModel);
+        //    }
+
+        //    // Redirect user
+        //    if (string.IsNullOrWhiteSpace(viewModel.ReturnUrl))
+        //        return RedirectToAction(nameof(Admin));
+        //    else
+        //        return Redirect(viewModel.ReturnUrl);
+        //}
+
+
 
 
 

@@ -29,4 +29,14 @@
     .main {
         padding: 20px 0 40px 0;
     }
+
+    .numbered:before {
+        margin-left: 22px;
+        margin-top: -26px;
+    }
+
+    .list-item {
+        margin: 35px 15px;
+    }
+
 }
