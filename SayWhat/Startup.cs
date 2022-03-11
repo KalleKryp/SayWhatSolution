@@ -22,6 +22,7 @@ namespace SayWhat
         {
             services.AddControllersWithViews();
             services.AddTransient<LyricsService>();
+            services.AddTransient<AccountService>();
 
 
             var connString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=LyricsDatabase;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";

@@ -1,15 +1,17 @@
 ﻿@model LyricsLoginVM
 
-<h3>Login</h3>
-<form asp-controller="Lyrics" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
-    <label asp-for="Username"></label>
-    <input asp-for="Username" />
-    <span asp-validation-for="Username"></span>
-    
-    <label asp-for="Password"></label>
-    <input asp-for="Password" />
-    <span asp-validation-for="Password"></span>
-    <br />
-    <input type="submit" value="Login" />
-</form>
-<div asp-validation-summary="All"></div>
+<div class="blue_box">
+    <h1>Login</h1>
+    <form asp-controller="Lyrics" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
+        <label asp-for="Username"></label>
+        <input class="input_field" asp-for="Username" />
+        <span asp-validation-for="Username"></span>
+
+        <label asp-for="Password"></label>
+        <input class="input_field" asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+        <br />
+        <input class="button button-primary" type="submit" value="Login" />
+    </form>
+    <div asp-validation-summary="All"></div>
+</div>

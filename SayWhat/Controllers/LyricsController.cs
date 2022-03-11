@@ -11,12 +11,14 @@ namespace SayWhat.Controllers
 {
     public class LyricsController : Controller
     {
-        readonly LyricsService service;
+        readonly LyricsService lyricsService;
+        private readonly AccountService accountService;
         private readonly string title;
 
-        public LyricsController(LyricsService service)
+        public LyricsController(LyricsService LyricsService, AccountService accountService)
         {
-            this.service = service;
+            this.lyricsService = LyricsService;
+            this.accountService = accountService;
             title = "Say What?! - The worlds weirdest lyrics ranked";
         }
 
@@ -26,7 +28,7 @@ namespace SayWhat.Controllers
         public IActionResult Index()
         {
             ViewBag.Title = title;
-            var random = service.GetRandom();
+            var random = lyricsService.GetRandom();
             return View(random);
         }
 
@@ -47,7 +49,7 @@ namespace SayWhat.Controllers
             if (!ModelState.IsValid)
                 return View(lyrics);
 
-            service.SubmitLyrics(lyrics);
+            lyricsService.SubmitLyrics(lyrics);
 
             return RedirectToAction(nameof(Index));
         }
@@ -58,7 +60,7 @@ namespace SayWhat.Controllers
         {
             ViewBag.Title = "Top list | " + title;
 
-            var toplist = service.GetToplist();
+            var toplist = lyricsService.GetToplist();
             return View(toplist);
         }
 
@@ -68,7 +70,7 @@ namespace SayWhat.Controllers
         {
             ViewBag.Title = "Admin | " + title;
 
-            var all = service.GetAll();
+            var all = lyricsService.GetAll();
             var model = new LyricsAdminVM
             {
                 ListOfLyricsByLetters = all
@@ -86,44 +88,42 @@ namespace SayWhat.Controllers
             return View(new LyricsLoginVM { ReturnUrl = returnUrl });
         }
 
-        //[HttpPost]
-        //[Route("/login")]
-        //public async Task<IActionResult> LoginAsync(LyricsLoginVM viewModel)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return View(viewModel);
+        [HttpPost]
+        [Route("/login")]
+        public async Task<IActionResult> LoginAsync(LyricsLoginVM viewModel)
+        {
+            if (!ModelState.IsValid)
+                return View(viewModel);
 
-        //    // Check if credentials is valid (and set auth cookie)
-        //    var success = await AccountService.TryLoginAsync(viewModel);
-        //    if (!success)
-        //    {
-        //        // Show error
-        //        ModelState.AddModelError(nameof(LyricsLoginVM.Username), "Login failed");
-        //        return View(viewModel);
-        //    }
+            // Check if credentials is valid (and set auth cookie)
+            var success = await accountService.TryLoginAsync(viewModel);
+            if (!success)
+            {
+                // Show error
+                ModelState.AddModelError(nameof(LyricsLoginVM.Username), "Login failed");
+                return View(viewModel);
+            }
+            
+            return RedirectToAction(nameof(Admin));
 
-        //    // Redirect user
-        //    if (string.IsNullOrWhiteSpace(viewModel.ReturnUrl))
-        //        return RedirectToAction(nameof(Admin));
-        //    else
-        //        return Redirect(viewModel.ReturnUrl);
-        //}
+        }
 
 
 
 
-
+        [Authorize]
         [Route("/edit/{id}")]
         [HttpGet]
         public IActionResult Edit(int id)
         {
             ViewBag.Title = "Edit | " + title;
 
-            var lyrics = service.GetLyricById(id);
+            var lyrics = lyricsService.GetLyricById(id);
             return View(lyrics);
         }
 
 
+        [Authorize]
         [Route("/edit/{id}")]
         [HttpPost]
         public IActionResult Edit(LyricsEditVM lyrics)
@@ -131,15 +131,16 @@ namespace SayWhat.Controllers
             if (!ModelState.IsValid)
                 return View(lyrics);
 
-            service.EditLyrics(lyrics);
+            lyricsService.EditLyrics(lyrics);
 
             return RedirectToAction("Admin");
         }
 
+        [Authorize]
         [Route("/delete")]
         public IActionResult Delete(int id)
         {
-            service.DeleteEntry(id);
+            lyricsService.DeleteEntry(id);
             return RedirectToAction("Admin");
         }
 
@@ -147,14 +148,14 @@ namespace SayWhat.Controllers
         [Route("/rate")]
         public async Task<IActionResult> RateAsync(int id, int rating)
         {
-            var newRating = service.Rate(id, rating);
+            var newRating = lyricsService.Rate(id, rating);
             return Content(newRating.ToString());
         }
 
         [Route("/lyrics-box")]
         public IActionResult LyricsBox()
         {
-            var random = service.GetRandom();
+            var random = lyricsService.GetRandom();
             return PartialView("_LyricsBox", random);
         }
 
